@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 
 from typing import Any
@@ -6,7 +7,11 @@ from typing import Any
 
 class JSONConfig:
 
-    def __init__(self, file_path: str) -> None:
+    def __init__(self, file_path: str | None = None) -> None:
+
+        if file_path is None:
+            script_root = os.path.abspath(os.path.dirname(sys.argv[0]))
+            file_path = os.path.join(script_root, "config.json")
 
         self.file_path = file_path
 
