@@ -2,7 +2,9 @@ import os
 import sys
 import json
 
-from typing import Any
+from typing import Any, TypeVar
+
+T = TypeVar('T')
 
 
 class JSONConfig:
@@ -68,7 +70,7 @@ class JSONConfig:
         if isinstance(v, int):
             return v
 
-        raise ValueError(f"{v} is not an int")
+        raise ValueError(f"{v} is not a int")
 
     def get_str(self, path: str, default: str | None = None) -> str:
 
@@ -77,7 +79,7 @@ class JSONConfig:
         if isinstance(v, str):
             return v
 
-        raise ValueError(f"{v} is not an str")
+        raise ValueError(f"{v} is not a str")
 
     def get_float(self, path: str, default: float | None = None) -> float:
 
@@ -86,7 +88,16 @@ class JSONConfig:
         if isinstance(v, float):
             return v
 
-        raise ValueError(f"{v} is not an float")
+        raise ValueError(f"{v} is not a float")
+
+    def get_list(self, path: str, default: list[T] | None) -> list[T]:
+
+        v = self.get(path, default)
+
+        if isinstance(v, list):
+            return v  # type: ignore
+
+        raise ValueError(f"{v} is not a list")
 
     ##########################################
     # SET
