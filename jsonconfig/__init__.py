@@ -63,6 +63,15 @@ class JSONConfig:
 
         raise KeyError(f"{path} was not found")
 
+    def get_bool(self, path: str, default: bool | None = None) -> bool:
+
+        v = self.get(path, default)
+
+        if isinstance(v, bool):
+            return v
+
+        raise ValueError(f"{v} is not a int")
+
     def get_int(self, path: str, default: int | None = None) -> int:
 
         v = self.get(path, default)
