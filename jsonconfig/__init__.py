@@ -99,7 +99,7 @@ class JSONConfig:
 
         raise ValueError(f"{v} is not a float")
 
-    def get_list(self, path: str, default: list[T] | None) -> list[T]:
+    def get_list(self, path: str, default: list[Any] | None) -> list[Any]:
 
         v = self.get(path, default)
 
